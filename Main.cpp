@@ -23,3 +23,36 @@ public:
            << setw(2) << setfill('0') << localtm->tm_mday;
         return ss.str();
     }
+
+    static int daysBetween(string startDate, string endDate) {
+        // Simple date difference calculation (assuming YYYY-MM-DD format)
+        return stoi(endDate.substr(8,2)) - stoi(startDate.substr(8,2));
+    }
+
+    static bool isDatePassed(string date) {
+        return date < getCurrentDate();
+    }
+
+    static string addDays(string startDate, int days) {
+        // Simple date addition
+        int day = stoi(startDate.substr(8,2)) + days;
+        int month = stoi(startDate.substr(5,2));
+        int year = stoi(startDate.substr(0,4));
+        
+        // Handle month boundaries (simplified)
+        if (day > 30) {
+            day -= 30;
+            month++;
+        }
+        if (month > 12) {
+            month = 1;
+            year++;
+        }
+        
+        stringstream ss;
+        ss << year << "-" 
+           << setw(2) << setfill('0') << month << "-" 
+           << setw(2) << setfill('0') << day;
+        return ss.str();
+    }
+};
