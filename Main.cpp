@@ -95,5 +95,19 @@ public:
     static bool isValidCopies(int copies) {
         return copies > 0;
     }
-};    
+};
+// Enums and Constants
+enum class UserRole {
+    ADMIN,
+    LIBRARIAN,
+    MEMBER
+};
+
+enum class BookStatus {
+    AVAILABLE,
+    BORROWED,
+    RESERVED,
+    OVERDUE
+};
+
 
