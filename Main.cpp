@@ -56,3 +56,7 @@ public:
         return ss.str();
     }
 };
+class IDGenerator {
+private:
+    static int bookCounter;
+    static int userCounter;
