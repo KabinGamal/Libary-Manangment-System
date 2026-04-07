@@ -173,3 +173,28 @@ public:
         totalFine = 0.0;
         isActive = true;
     }
+    bool authenticate(string pwd) const {
+        return password == pwd && isActive;
+    }
+    
+    string getRoleString() const {
+        switch(role) {
+            case UserRole::ADMIN: return "Admin";
+            case UserRole::LIBRARIAN: return "Librarian";
+            case UserRole::MEMBER: return "Member";
+            default: return "Unknown";
+        }
+    }
+    
+    void display() const {
+        cout << "=========================================" << endl;
+        cout << "UserID: " << userID << endl;
+        cout << "Username: " << username << endl;
+        cout << "Email: " << email << endl;
+        cout << "Phone: " << phone << endl;
+        cout << "Role: " << getRoleString() << endl;
+        cout << "Total Fine: RS " << fixed << setprecision(2) << totalFine << endl;
+        cout << "Status: " << (isActive ? "Active" : "Inactive") << endl;
+        cout << "=========================================" << endl;
+    }
+};
