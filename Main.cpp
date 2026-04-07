@@ -149,3 +149,7 @@ public:
         cout << "Price: RS " << fixed << setprecision(2) << price << endl;
         cout << "=========================================" << endl;
     }
+    bool isAvailable() const {
+        return availableCopies > 0;
+    }
+};
