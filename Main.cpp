@@ -113,4 +113,17 @@ enum class BookStatus {
 const double FINE_PER_DAY = 10.0; // RS per day
 const int MAX_BORROW_DAYS = 14;
 const int MAX_BOOKS_PER_USER = 5;
+// Book Class
+class Book {
+public:
+    string bookID;
+    string title;
+    string author;
+    string isbn;
+    string category;
+    int publicationYear;
+    int totalCopies;
+    int availableCopies;
+    double price; // in RS
+    
 
