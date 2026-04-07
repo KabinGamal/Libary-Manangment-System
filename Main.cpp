@@ -153,3 +153,13 @@ public:
         return availableCopies > 0;
     }
 };
+class User {
+public:
+    string userID;
+    string username;
+    string password;
+    string email;
+    string phone;
+    UserRole role;
+    double totalFine; // in RS
+    bool isActive;
