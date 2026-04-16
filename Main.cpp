@@ -407,3 +407,30 @@ private:
             if (Validator::isValidYear(year)) break;
             cout << "Invalid year! Please enter a valid publication year (1800-current year)." << endl;
         }
+        // Validate copies
+        while (true) {
+            cout << "Number of Copies: ";
+            cin >> copies;
+            if (Validator::isValidCopies(copies)) break;
+            cout << "Invalid number! Please enter a positive number of copies." << endl;
+        }
+        
+        // Validate price
+        while (true) {
+            cout << "Price (RS): ";
+            cin >> price;
+            if (Validator::isValidPrice(price)) break;
+            cout << "Invalid price! Please enter a non-negative price." << endl;
+        }
+        
+        books.push_back(Book(title, author, isbn, category, year, copies, price));
+        cout << "Book added successfully! Book ID: " << books.back().bookID << endl;
+    }
+    
+    // NEW FEATURE: Delete Book
+    void deleteBook() {
+        if (!currentUser || (currentUser->role != UserRole::ADMIN && currentUser->role != UserRole::LIBRARIAN)) {
+            cout << "Access denied! Admin or Librarian privileges required." << endl;
+            return;
+        }
+
