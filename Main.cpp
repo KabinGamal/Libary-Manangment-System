@@ -367,3 +367,13 @@ private:
             cout << "Login successful! Welcome, " << currentUser->username << " (" << currentUser->getRoleString() << ")" << endl;
             return true;
         }
+        cout << "Login failed! Invalid username or password." << endl;
+        return false;
+    }
+    
+    void logout() {
+        if (currentUser) {
+            cout << "Goodbye, " << currentUser->username << "!" << endl;
+            currentUser = nullptr;
+        }
+    }
