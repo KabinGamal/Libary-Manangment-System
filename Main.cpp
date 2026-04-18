@@ -452,4 +452,19 @@ private:
             cout << "Please wait until all copies are returned before deleting the book." << endl;
             return;
         }
-
+        // Confirm deletion
+        cout << "\nBook to be deleted:" << endl;
+        bookToDelete.display();
+        
+        char confirmation;
+        cout << "Are you sure you want to delete this book? (y/n): ";
+        cin >> confirmation;
+        
+        if (confirmation == 'y' || confirmation == 'Y') {
+            // Remove book from vector
+            books.erase(books.begin() + bookIndex);
+            cout << "Book deleted successfully!" << endl;
+        } else {
+            cout << "Book deletion cancelled." << endl;
+        }
+    }
