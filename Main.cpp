@@ -468,3 +468,57 @@ private:
             cout << "Book deletion cancelled." << endl;
         }
     }
+SearchCriteria criteria;
+        int choice;
+        
+        cout << "\n=== SEARCH BOOKS ===" << endl;
+        cout << "1. Search by Title" << endl;
+        cout << "2. Search by Author" << endl;
+        cout << "3. Search by Category" << endl;
+        cout << "4. Search by Year" << endl;
+        cout << "5. Show Available Books Only" << endl;
+        cout << "6. Advanced Search (Multiple Criteria)" << endl;
+        cout << "Choose option: ";
+        cin >> choice;
+        cin.ignore();
+        
+        switch(choice) {
+            case 1:
+                cout << "Enter title: ";
+                getline(cin, criteria.title);
+                break;
+            case 2:
+                cout << "Enter author: ";
+                getline(cin, criteria.author);
+                break;
+            case 3:
+                cout << "Enter category: ";
+                getline(cin, criteria.category);
+                break;
+            case 4:
+                cout << "Enter publication year: ";
+                cin >> criteria.publicationYear;
+                break;
+            case 5:
+                criteria.availableOnly = true;
+                break;
+            case 6:
+                cout << "Title (or press enter to skip): ";
+                getline(cin, criteria.title);
+                cout << "Author (or press enter to skip): ";
+                getline(cin, criteria.author);
+                cout << "Category (or press enter to skip): ";
+                getline(cin, criteria.category);
+                cout << "Publication Year (0 to skip): ";
+                cin >> criteria.publicationYear;
+                cout << "Show available only? (1=Yes, 0=No): ";
+                cin >> criteria.availableOnly;
+                break;
+            default:
+                cout << "Invalid choice!" << endl;
+                return;
+        }
+        
+        vector<Book*> results;
+        for (Book& book : books) {
+            bool matches = true;
