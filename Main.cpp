@@ -567,3 +567,42 @@ SearchCriteria criteria;
             cout << category.first << ": " << category.second << " books" << endl;
         }
     }
+    void borrowBook() {
+        if (!currentUser || currentUser->role != UserRole::MEMBER) {
+            cout << "Only members can borrow books!" << endl;
+            return;
+        }
+        
+        if (hasOverdueBooks(currentUser->userID)) {
+            cout << "You have overdue books! Please return them first." << endl;
+            return;
+        }
+        
+        if (getBorrowedBooksCount(currentUser->userID) >= MAX_BOOKS_PER_USER) {
+            cout << "You have reached the maximum limit of " << MAX_BOOKS_PER_USER << " books!" << endl;
+            return;
+        }
+        
+        string bookID;
+        cout << "Enter Book ID to borrow: ";
+        cin >> bookID;
+        
+        int bookIndex = findBookByID(bookID);
+        if (bookIndex == -1) {
+            cout << "Book not found!" << endl;
+            return;
+        }
+        
+        Book& book = books[bookIndex];
+        if (!book.isAvailable()) {
+            cout << "Book is not available!" << endl;
+            return;
+        }
+        
+        // Create transaction
+        transactions.push_back(Transaction(currentUser->userID, bookID));
+        book.availableCopies--;
+        
+        cout << "Book borrowed successfully!" << endl;
+        cout << "Due Date: " << transactions.back().dueDate << endl;
+    }
