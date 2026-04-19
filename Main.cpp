@@ -606,3 +606,36 @@ SearchCriteria criteria;
         cout << "Book borrowed successfully!" << endl;
         cout << "Due Date: " << transactions.back().dueDate << endl;
     }
+    void returnBook() {
+        if (!currentUser) {
+            cout << "Please login first!" << endl;
+            return;
+        }
+        
+        string bookID;
+        cout << "Enter Book ID to return: ";
+        cin >> bookID;
+        
+        // Find active transaction
+        for (Transaction& trans : transactions) {
+            if (trans.bookID == bookID && trans.userID == currentUser->userID && !trans.isReturned) {
+                trans.returnBook();
+                
+                // Update book availability
+                int bookIndex = findBookByID(bookID);
+                if (bookIndex != -1) {
+                    books[bookIndex].availableCopies++;
+                }
+                
+                cout << "Book returned successfully!" << endl;
+                if (trans.fineAmount > 0) {
+                    cout << "Fine applied: RS " << trans.fineAmount << endl;
+                    // Update user's total fine
+                    currentUser->totalFine += trans.fineAmount;
+                }
+                return;
+            }
+        }
+        
+        cout << "No active borrow record found for this book!" << endl;
+    }
