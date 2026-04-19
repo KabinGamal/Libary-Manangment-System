@@ -639,3 +639,23 @@ SearchCriteria criteria;
         
         cout << "No active borrow record found for this book!" << endl;
     }
+    // Fine Management
+    void payFine() {
+        if (!currentUser) {
+            cout << "Please login first!" << endl;
+            return;
+        }
+        
+        cout << "Your current fine: RS " << currentUser->totalFine << endl;
+        
+        if (currentUser->totalFine > 0) {
+            double amount;
+            cout << "Enter amount to pay: RS ";
+            cin >> amount;
+            
+            if (amount > 0 && amount <= currentUser->totalFine) {
+                currentUser->totalFine -= amount;
+                cout << "Payment successful! Remaining fine: RS " << currentUser->totalFine << endl;
+            } else {
+                cout << "Invalid amount!" << endl;
+            }
